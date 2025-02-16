@@ -5,6 +5,7 @@ import lesson1.code1.appStructure2.back.dto.RequestDto;
 import lesson1.code1.appStructure2.back.dto.ResponseDto;
 import lesson1.code1.appStructure2.back.entity.Task;
 import lesson1.code1.appStructure2.back.service.AddTaskService;
+import lesson1.code1.appStructure2.back.service.DeleteTaskService;
 import lesson1.code1.appStructure2.back.service.FindTaskService;
 
 import java.util.List;
@@ -13,12 +14,14 @@ public class UserMenu {
 
     private AddTaskService addTaskService;
     private FindTaskService findTaskService;
+    private DeleteTaskService deleteTaskService;
     private UserInput userInput;
 
-    public UserMenu(AddTaskService addTaskService, FindTaskService findTaskService, UserInput userInput) {
+    public UserMenu(AddTaskService addTaskService, FindTaskService findTaskService, DeleteTaskService deleteTaskService ,UserInput userInput) {
         this.addTaskService = addTaskService;
         this.findTaskService = findTaskService;
         this.userInput = userInput;
+        this.deleteTaskService = deleteTaskService;
     }
 
     public void menu(){
@@ -53,8 +56,24 @@ public class UserMenu {
     }
 
     private void deleteTaskById() {
-        // переписать это метод
-        System.out.println("Пока не работает !!!");
+        System.out.println("Удаление задачи по id");
+        Integer taskIdForSearch = userInput.userInt("Введите id задачи -");
+
+        String answer = userInput.userText("Вы действительно желаете удалить задачу -" + taskIdForSearch + "?");
+        switch (answer.toLowerCase()){
+            case "дa":
+                ResponseDto<Task> response = deleteTaskService.deleteTaskById(taskIdForSearch);
+
+                System.out.println("Код ответа: " + response.getResponseCode());
+                System.out.println(response.getMessage());
+                break;
+            case "нет":
+                System.out.println("Отмена операции");
+                break;
+            default:
+                System.out.println("Некорректный ввод. Введите 'да' или 'нет'.");
+        }
+
     }
 
     private void findTasksByName() {

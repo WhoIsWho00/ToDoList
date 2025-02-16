@@ -27,7 +27,7 @@ public class AddTaskService {
         if (message.isBlank()) {
             Task newTask = new Task(request.getName(), request.getDescription());
             Task savedTask = repository.add(newTask);
-            return new ResponseDto<>(200, savedTask,message);
+            return new ResponseDto<>(200, savedTask, message);
         } else {
             return new ResponseDto<>(400,null, message);
         }

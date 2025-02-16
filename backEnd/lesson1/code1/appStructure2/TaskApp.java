@@ -4,6 +4,7 @@ import User.UserInput;
 import lesson1.code1.appStructure2.back.repository.TaskInMemory;
 import lesson1.code1.appStructure2.back.repository.TaskRepository;
 import lesson1.code1.appStructure2.back.service.AddTaskService;
+import lesson1.code1.appStructure2.back.service.DeleteTaskService;
 import lesson1.code1.appStructure2.back.service.FindTaskService;
 import lesson1.code1.appStructure2.back.service.ValidationTaskService;
 import lesson1.code1.appStructure2.front.UserMenu;
@@ -16,10 +17,11 @@ public class TaskApp {
 
         AddTaskService addTaskService = new AddTaskService(repository, validationTaskService);
         FindTaskService findTaskService = new FindTaskService(repository);
+        DeleteTaskService deleteTaskService = new DeleteTaskService(repository, findTaskService);
 
         UserInput userInput = new UserInput();
 
-        UserMenu userMenu = new UserMenu(addTaskService, findTaskService, userInput);
+        UserMenu userMenu = new UserMenu(addTaskService, findTaskService, deleteTaskService, userInput);
 
         userMenu.menu();
 
