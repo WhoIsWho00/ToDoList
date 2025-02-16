@@ -59,20 +59,36 @@ public class UserMenu {
         System.out.println("Удаление задачи по id");
         Integer taskIdForSearch = userInput.userInt("Введите id задачи -");
 
-        String answer = userInput.userText("Вы действительно желаете удалить задачу -" + taskIdForSearch + "?");
-        switch (answer.toLowerCase()){
-            case "дa":
+        String answer = userInput.userText("Вы действительно желаете удалить задачу - " + taskIdForSearch + "?").trim().toLowerCase();
+
+        switch (answer){
+            case "да":
                 ResponseDto<Task> response = deleteTaskService.deleteTaskById(taskIdForSearch);
 
                 System.out.println("Код ответа: " + response.getResponseCode());
                 System.out.println(response.getMessage());
+
                 break;
+
             case "нет":
                 System.out.println("Отмена операции");
                 break;
             default:
                 System.out.println("Некорректный ввод. Введите 'да' или 'нет'.");
         }
+
+
+        /*if (answer.equalsIgnoreCase("да")) { // ✅ Теперь регистр не важен
+            ResponseDto<Task> response = deleteTaskService.deleteTaskById(taskIdForSearch);
+            System.out.println("Код ответа: " + response.getResponseCode());
+            System.out.println(response.getMessage());
+        } else if (answer.equalsIgnoreCase("нет")) {
+            System.out.println("Отмена операции");
+        } else {
+            System.out.println("Некорректный ввод. Введите 'да' или 'нет'.");
+        }
+
+         */
 
     }
 
