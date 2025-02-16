@@ -77,19 +77,6 @@ public class UserMenu {
                 System.out.println("Некорректный ввод. Введите 'да' или 'нет'.");
         }
 
-
-        /*if (answer.equalsIgnoreCase("да")) { // ✅ Теперь регистр не важен
-            ResponseDto<Task> response = deleteTaskService.deleteTaskById(taskIdForSearch);
-            System.out.println("Код ответа: " + response.getResponseCode());
-            System.out.println(response.getMessage());
-        } else if (answer.equalsIgnoreCase("нет")) {
-            System.out.println("Отмена операции");
-        } else {
-            System.out.println("Некорректный ввод. Введите 'да' или 'нет'.");
-        }
-
-         */
-
     }
 
     private void findTasksByName() {
